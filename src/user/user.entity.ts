@@ -18,5 +18,5 @@ export class User {
     password: string;
 
     @Column()
-    zipCode: number;
+    zipCode: string;
 }

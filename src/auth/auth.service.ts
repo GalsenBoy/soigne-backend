@@ -5,11 +5,16 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/user.entity';
 import { LoginDto } from 'src/dtos/login.dto';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
     constructor(@InjectRepository(User)
-    private usersRepository: Repository<User>,) { }
+    private usersRepository: Repository<User>,
+        private jwtService: JwtService,
+        private configService: ConfigService
+    ) { }
 
     async SignUp(user: UserDto) {
         const { email, password } = user;
@@ -33,6 +38,8 @@ export class AuthService {
         if (!passwordMatch) {
             throw new ConflictException('Invalid password');
         }
-        return userExists;
+        const payload = { sub: user, firstName: user.email };
+        const token = this.jwtService.sign(payload, { expiresIn: "2h", secret: this.configService.get('JWT_SECRET') });
+        return { token, user: userExists };
     }
 }
