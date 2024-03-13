@@ -1,15 +1,6 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Length } from "class-validator";
 
-export class UserDto {
-
-    @IsString()
-    @IsNotEmpty()
-    firstName: string;
-
-    @IsString()
-    @IsNotEmpty()
-    lastName: string;
-
+export class LoginDto {
 
     @IsString()
     @IsNotEmpty()
@@ -18,9 +9,6 @@ export class UserDto {
 
     @IsString()
     @IsNotEmpty()
+    @Length(8)
     password: string;
-
-    @Length(5, 5)
-    @IsNotEmpty()
-    zipCode: number;
 }
