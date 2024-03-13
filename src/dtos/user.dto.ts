@@ -20,7 +20,7 @@ export class UserDto {
     @IsNotEmpty()
     password: string;
 
-    @Length(5, 5)
+    @IsString()
     @IsNotEmpty()
-    zipCode: number;
+    zipCode: string;
 }
