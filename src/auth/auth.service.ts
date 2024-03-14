@@ -13,7 +13,7 @@ export class AuthService {
     constructor(@InjectRepository(User)
     private usersRepository: Repository<User>,
         private jwtService: JwtService,
-        private configService: ConfigService
+        // private configService: ConfigService
     ) { }
 
     async SignUp(user: UserDto) {
@@ -38,8 +38,9 @@ export class AuthService {
         if (!passwordMatch) {
             throw new ConflictException('Invalid password');
         }
-        const payload = { sub: user, firstName: user.email };
-        const token = this.jwtService.sign(payload, { expiresIn: "2h", secret: this.configService.get('JWT_SECRET') });
-        return { token, user: userExists };
+        const payload = { sub: userExists.id, email: userExists.email, firstName: userExists.firstName, lastName: userExists.lastName, zipCode: userExists.zipCode };
+        return {
+            access_token: await this.jwtService.signAsync(payload),
+        };
     }
 }
