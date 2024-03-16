@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Sejour } from 'src/sejour/sejour.entity';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
     @Column()
     zipCode: string;
+
+    @OneToMany(() => Sejour, (sejour) => sejour.user)
+    sejours: Sejour[]
 }
