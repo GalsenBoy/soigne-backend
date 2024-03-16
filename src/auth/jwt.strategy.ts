@@ -7,11 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 
 export interface JwtPayload {
-    sub: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    zipCode: string;
+    id: string;
 }
 
 
@@ -26,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: JwtPayload) {
-        const user = await this.usersRepository.findOne({ where: { email: payload.email } });
+        const user = await this.usersRepository.findOne({ where: { id: payload.id } });
         if (user) {
             const { password, ...result } = user;
             return result;

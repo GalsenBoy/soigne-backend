@@ -38,9 +38,13 @@ export class AuthService {
         if (!passwordMatch) {
             throw new ConflictException('Invalid password');
         }
-        const payload = { sub: userExists.id, email: userExists.email, firstName: userExists.firstName, lastName: userExists.lastName, zipCode: userExists.zipCode };
+        const payload = { id: userExists.id };
         return {
             access_token: await this.jwtService.signAsync(payload),
         };
+    }
+
+    async getProfile(userId: string) {
+        return await this.usersRepository.findOne({ where: { id: userId } });
     }
 }
