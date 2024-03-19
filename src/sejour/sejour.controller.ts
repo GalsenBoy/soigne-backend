@@ -9,19 +9,11 @@ import { log } from 'console';
 export class SejourController {
     constructor(private readonly sejourService: SejourService) { }
 
-    @UseGuards(JwtAuthGuard) // Utilisez le JwtAuthGuard pour protéger cette route
+    @UseGuards(JwtAuthGuard)
     @Post()
     async createSejour(@Request() req, @Body() sejourData: Sejour) {
-        const userId = req.user.id;
-
-        // Récupérez le médecin en fonction de la spécialité saisie par l'utilisateur
-        const medecin: Medecin = await this.sejourService.findMedecinBySpeciality(sejourData.medecin.specialite, sejourData.medecin.id);
-
-        if (!medecin) {
-            throw new Error('Médecin non trouvé');
-        }
-        sejourData.user = userId;
-        sejourData.medecin = medecin;
+        sejourData.user = req.user.id;
+        // sejourData.medecin = medecin;
 
         return await this.sejourService.createSejour(sejourData);
     }

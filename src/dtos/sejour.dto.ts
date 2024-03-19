@@ -16,7 +16,7 @@ export class SejourDto {
 
     @IsString()
     @IsNotEmpty()
-    speciality: string;
+    specialite: string;
 
     @IsString()
     @IsNotEmpty()

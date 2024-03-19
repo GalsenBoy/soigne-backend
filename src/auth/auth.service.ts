@@ -7,6 +7,7 @@ import { User } from 'src/user/user.entity';
 import { LoginDto } from 'src/dtos/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { Role } from 'src/roles/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
             throw new ConflictException('User already exists');
         }
         const passwordHash = await bcrypt.hash(password, 10);
-        const newUser = this.usersRepository.create({ ...user, password: passwordHash });
+        const newUser = this.usersRepository.create({ ...user, password: passwordHash, roles: Role.User });
         await this.usersRepository.save(newUser);
         return newUser;
     }
@@ -47,4 +48,9 @@ export class AuthService {
     async getProfile(userId: string) {
         return await this.usersRepository.findOne({ where: { id: userId } });
     }
+
+    // async getUserRoles(userId: string): Promise<Role[]> {
+    //     const user = await this.usersRepository.findOne(userId, { relations: ['roles'] });
+    //     return user.roles;
+    // }
 }

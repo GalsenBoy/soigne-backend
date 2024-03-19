@@ -24,4 +24,5 @@ export class Sejour {
 
     @ManyToOne(() => Medecin, { eager: true })
     medecin: Medecin;
+
 }
