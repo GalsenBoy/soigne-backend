@@ -16,9 +16,9 @@ export class SejourService {
         return await this.sejourRepository.save(newSejour);
     }
 
-    async findMedecinBySpeciality(specialite: string, id: string): Promise<Medecin> {
-        return await this.medecinRepository.findOne(
-            { where: { specialite: specialite, id: id } }
-        );
-    }
+    // async findMedecinBySpeciality(specialite: string, id: string): Promise<Medecin> {
+    //     return await this.medecinRepository.findOne(
+    //         { where: { specialite: specialite, id: id } }
+    //     );
+    // }
 }
