@@ -2,11 +2,11 @@ import { IsDate, IsNotEmpty, IsString } from "class-validator";
 import { User } from "src/user/user.entity";
 
 export class SejourDto {
-    @IsDate()
+    // @IsDate()
     @IsNotEmpty()
     dateEntree: Date;
 
-    @IsDate()
+    // @IsDate()
     @IsNotEmpty()
     dateSortie: Date;
 
