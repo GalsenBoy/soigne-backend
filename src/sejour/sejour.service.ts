@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { And, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Sejour } from './sejour.entity';
 import { SejourDto } from 'src/dtos/sejour.dto';
 import { Medecin } from 'src/medecin/medecin.entity';
@@ -13,12 +13,22 @@ export class SejourService {
 
     async createSejour(sejour: Sejour) {
         const newSejour = this.sejourRepository.create(sejour);
+        console.log(newSejour);
         return await this.sejourRepository.save(newSejour);
     }
 
-    // async findMedecinBySpeciality(specialite: string, id: string): Promise<Medecin> {
-    //     return await this.medecinRepository.findOne(
-    //         { where: { specialite: specialite, id: id } }
-    //     );
-    // }
+    async getSejours() {
+        return await this.sejourRepository.find();
+    }
+
+    async getSejoursByUserId(id: string) {
+        return await this.sejourRepository.find({ where: { user: { id } } });
+    }
+
+    async asignerMedecin(sejourId: string, medecinId: string) {
+        const sejour = await this.sejourRepository.findOne({ where: { id: sejourId } });
+        const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
+        sejour.medecin = medecin;
+        return await this.sejourRepository.save(sejour);
+    }
 }

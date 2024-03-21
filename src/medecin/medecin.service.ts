@@ -11,4 +11,8 @@ export class MedecinService {
         const newMedecin = await this.medecinRepository.create(medecin);
         return await this.medecinRepository.save(newMedecin);
     }
+
+    async getMedecins(): Promise<Medecin[]> {
+        return await this.medecinRepository.find();
+    }
 }

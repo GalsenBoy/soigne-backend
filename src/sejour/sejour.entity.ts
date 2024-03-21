@@ -7,10 +7,10 @@ export class Sejour {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column()
+    @Column({ type: 'date' })
     dateEntree: Date;
 
-    @Column()
+    @Column({ type: 'date' })
     dateSortie: Date;
 
     @Column()
