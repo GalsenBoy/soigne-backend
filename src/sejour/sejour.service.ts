@@ -18,8 +18,11 @@ export class SejourService {
     }
 
     async getSejours() {
-        return await this.sejourRepository.find();
+        const sejourWithoutMedecins = await this.sejourRepository.find();
+        return sejourWithoutMedecins.filter(sejourWithoutMedecin => !sejourWithoutMedecin.medecin);
     }
+
+
 
     async getSejoursByUserId(id: string) {
         return await this.sejourRepository.find({ where: { user: { id } } });
