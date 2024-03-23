@@ -19,4 +19,10 @@ export class MedecinController {
     async getMedecins(): Promise<Medecin[]> {
         return await this.medecinService.getMedecins();
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('limit')
+    async limitMedecinsWithFiveSejours(): Promise<Medecin[]> {
+        return await this.medecinService.limitMedecinsWithFiveSejours();
+    }
 }
