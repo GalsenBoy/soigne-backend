@@ -16,16 +16,6 @@ export class MedecinService {
         return await this.medecinRepository.find();
     }
 
-    // async limitMedecinsWithFiveSejours(): Promise<Medecin[]> {
-    //     const medecins = await this.medecinRepository.find({ relations: ['sejours'] });
-    //     const today = new Date().toISOString().split('T')[0];
-    //     const medecinSejourOfDay = medecins.filter(medecin => medecin.sejours.filter(sejour =>
-    //         (sejour.dateEntree <= new Date(today) && sejour.dateSortie >= new Date(today))
-    //     ).length <= 5);
-    //     console.log(new Date(today));
-    //     return medecinSejourOfDay;
-    //     ;
-    // }
     async limitMedecinsWithFiveSejours(): Promise<Medecin[]> {
         const medecins = await this.medecinRepository.find({ relations: ['sejours'] });
         const today = new Date();
