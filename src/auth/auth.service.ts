@@ -1,20 +1,23 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/dtos/user.dto';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/user.entity';
 import { LoginDto } from 'src/dtos/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Role } from 'src/roles/role.enum';
+import { Medecin } from 'src/medecin/medecin.entity';
+import { MedecinLoginDto } from 'src/dtos/medecin.login.dto';
 
 @Injectable()
 export class AuthService {
     constructor(@InjectRepository(User)
     private usersRepository: Repository<User>,
         private jwtService: JwtService,
-        // private configService: ConfigService
+        @InjectRepository(Medecin)
+        private medecinRepository: Repository<Medecin>
     ) { }
 
     async SignUp(user: UserDto) {
@@ -49,8 +52,15 @@ export class AuthService {
         return await this.usersRepository.findOne({ where: { id: userId } });
     }
 
-    // async getUserRoles(userId: string): Promise<Role[]> {
-    //     const user = await this.usersRepository.findOne(userId, { relations: ['roles'] });
-    //     return user.roles;
-    // }
+    async signInWithMedecinMatricule(matricule: { matricule: string }) {
+        const medecin = await this.medecinRepository.findOne({ where: { matricule: matricule.matricule } });
+        if (!medecin) {
+            throw new ConflictException('Medecin does not exist');
+        }
+        const payload = { id: medecin.id };
+        return {
+            access_token: await this.jwtService.signAsync(payload),
+        };
+    }
+
 }
