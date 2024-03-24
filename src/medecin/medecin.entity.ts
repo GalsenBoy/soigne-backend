@@ -15,7 +15,7 @@ export class Medecin {
     @Column()
     specialite: string;
 
-    @Column()
+    @Column({ unique: true })
     matricule: string;
 
     @OneToMany(() => Sejour, (sejour) => sejour.medecin)
