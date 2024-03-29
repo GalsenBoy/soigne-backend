@@ -3,6 +3,7 @@ import { MedecinService } from './medecin.service';
 import { Medecin } from './medecin.entity';
 import { Roles } from 'src/roles/role.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { Sejour } from 'src/sejour/sejour.entity';
 
 @Controller('medecin')
 export class MedecinController {
@@ -19,6 +20,8 @@ export class MedecinController {
     async getMedecins(): Promise<Medecin[]> {
         return await this.medecinService.getMedecins();
     }
+
+
 
     @UseGuards(JwtAuthGuard)
     @Get('limit')

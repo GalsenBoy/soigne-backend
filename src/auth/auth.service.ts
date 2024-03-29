@@ -13,6 +13,7 @@ import { MedecinLoginDto } from 'src/dtos/medecin.login.dto';
 
 @Injectable()
 export class AuthService {
+
     constructor(@InjectRepository(User)
     private usersRepository: Repository<User>,
         private jwtService: JwtService,
@@ -50,6 +51,10 @@ export class AuthService {
 
     async getProfile(userId: string) {
         return await this.usersRepository.findOne({ where: { id: userId } });
+    }
+
+    async getMedecinProfile(medecinId: string) {
+        return await this.medecinRepository.findOne({ where: { id: medecinId } });
     }
 
     async signInWithMedecinMatricule(matricule: { matricule: string }) {

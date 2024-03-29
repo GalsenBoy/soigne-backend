@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request, Response, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, Response, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/dtos/user.dto';
 import { LoginDto } from 'src/dtos/login.dto';
@@ -25,6 +25,13 @@ export class AuthController {
     async SignInWithMedecinMatricule(@Body() matricule: { matricule: string }) {
         return this.authService.signInWithMedecinMatricule(matricule);
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('medecin/profile')
+    async MedecinProfile(@Request() req) {
+        return this.authService.getMedecinProfile(req.user.id);
+    }
+
 
     @UseGuards(JwtAuthGuard)
     @Get('profile')
