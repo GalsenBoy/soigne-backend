@@ -9,8 +9,6 @@ import { Roles } from 'src/roles/role.decorator';
 export class SejourController {
     constructor(private readonly sejourService: SejourService) { }
 
-
-
     // @Roles('Admin')
     @UseGuards(JwtAuthGuard)
     @Get()
@@ -29,6 +27,12 @@ export class SejourController {
     @Get('user')
     async getSejoursByUserId(@Request() req) {
         return await this.sejourService.getSejoursByUserId(req.user.id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('medecin')
+    async getSejoursByMedecinId(@Request() req) {
+        return await this.sejourService.getSejoursByMedecinId(req.user.id);
     }
 
     @UseGuards(JwtAuthGuard)

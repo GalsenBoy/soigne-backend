@@ -22,10 +22,12 @@ export class SejourService {
         return sejourWithoutMedecins.filter(sejourWithoutMedecin => !sejourWithoutMedecin.medecin);
     }
 
-
-
     async getSejoursByUserId(id: string) {
         return await this.sejourRepository.find({ where: { user: { id } } });
+    }
+
+    async getSejoursByMedecinId(id: string) {
+        return await this.sejourRepository.find({ where: { medecin: { id } } });
     }
 
     async asignerMedecin(sejourId: string, medecinId: string) {
