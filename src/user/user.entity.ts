@@ -1,6 +1,7 @@
+import { Avis } from 'src/avis/avis.entity';
 import { Role } from 'src/roles/role.enum';
 import { Sejour } from 'src/sejour/sejour.entity';
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
 export class User {
@@ -27,4 +28,7 @@ export class User {
 
     @OneToMany(() => Sejour, (sejour) => sejour.user)
     sejours: Sejour[]
+
+    @OneToOne(() => Avis, (avis) => avis.user)
+    avis: Avis[]
 }

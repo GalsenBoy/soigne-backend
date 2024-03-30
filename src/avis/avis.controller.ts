@@ -1,4 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { AvisService } from './avis.service';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { Avis } from './avis.entity';
 
 @Controller('avis')
-export class AvisController {}
+export class AvisController {
+    constructor(private readonly avisService: AvisService) { }
+
+    @UseGuards(JwtAuthGuard)
+    @Post()
+    async createAvisWithMedecinId(@Body() avis: Avis, @Request() req) {
+        return this.avisService.createAvisWithMedecinId(avis, req.user.id);
+    }
+}

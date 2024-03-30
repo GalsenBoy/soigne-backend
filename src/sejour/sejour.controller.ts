@@ -37,8 +37,7 @@ export class SejourController {
 
     @UseGuards(JwtAuthGuard)
     @Post('assign')
-    async asignerMedecin(@Body() data: { sejourId: string, medecinId: string }) {
-        return await this.sejourService.asignerMedecin(data.sejourId, data.medecinId);
+    async asignerMedecin(@Body() data: { sejourId: string, medecinId: string, userId: string }) {
+        return await this.sejourService.asignerMedecinandUser(data.sejourId, data.medecinId, data.userId);
     }
-
 }

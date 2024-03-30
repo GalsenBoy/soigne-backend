@@ -4,11 +4,13 @@ import { Repository } from 'typeorm';
 import { Sejour } from './sejour.entity';
 import { SejourDto } from 'src/dtos/sejour.dto';
 import { Medecin } from 'src/medecin/medecin.entity';
+import { User } from 'src/user/user.entity';
 
 @Injectable()
 export class SejourService {
     constructor(@InjectRepository(Sejour) private sejourRepository: Repository<Sejour>,
-        @InjectRepository(Medecin) private medecinRepository: Repository<Medecin>) { }
+        @InjectRepository(Medecin) private medecinRepository: Repository<Medecin>,
+        @InjectRepository(User) private userRepository: Repository<User>) { }
 
 
     async createSejour(sejour: Sejour) {
@@ -30,10 +32,12 @@ export class SejourService {
         return await this.sejourRepository.find({ where: { medecin: { id } } });
     }
 
-    async asignerMedecin(sejourId: string, medecinId: string) {
+
+    async asignerMedecinandUser(sejourId: string, medecinId: string, userId: string) {
         const sejour = await this.sejourRepository.findOne({ where: { id: sejourId } });
         const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
         sejour.medecin = medecin;
+        sejour.user = await this.userRepository.findOne({ where: { id: userId } }); // Replace 'this.userRepository' with the actual repository for the 'User' entity
         return await this.sejourRepository.save(sejour);
     }
 }

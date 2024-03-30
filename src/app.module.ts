@@ -13,6 +13,7 @@ import { Medecin } from './medecin/medecin.entity';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './roles/role.guard';
 import { AvisModule } from './avis/avis.module';
+import { Avis } from './avis/avis.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -22,7 +23,7 @@ import { AvisModule } from './avis/avis.module';
     username: 'root',
     password: '',
     database: 'e_sante',
-    entities: [User, Sejour, Medecin],
+    entities: [User, Sejour, Medecin, Avis],
     synchronize: true,
   }), AuthModule, UserModule, ConfigModule.forRoot({ isGlobal: true }), MedecinModule, SejourModule, AvisModule],
   controllers: [AppController],
