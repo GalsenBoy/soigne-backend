@@ -31,4 +31,6 @@ export class MedecinService {
         });
         return medecinSejourOfDay;
     }
+
+
 }
