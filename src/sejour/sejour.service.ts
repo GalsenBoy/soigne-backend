@@ -15,8 +15,13 @@ export class SejourService {
 
     async createSejour(sejour: Sejour) {
         const newSejour = this.sejourRepository.create(sejour);
+
         console.log(newSejour);
         return await this.sejourRepository.save(newSejour);
+    }
+
+    async getSejour() {
+        return await this.sejourRepository.find({ relations: ['user', 'medecin'] });
     }
 
     async getSejours() {
@@ -32,12 +37,18 @@ export class SejourService {
         return await this.sejourRepository.find({ where: { medecin: { id } } });
     }
 
+    async getSejourById(id: string) {
+        return await this.sejourRepository.findOne({ where: { id } });
+    }
 
-    async asignerMedecinandUser(sejourId: string, medecinId: string, userId: string) {
-        const sejour = await this.sejourRepository.findOne({ where: { id: sejourId } });
+
+    async asignerMedecinandUser(sejourId: string, medecinId: string) {
+        const sejour = await this.sejourRepository.findOne({
+            where: { id: sejourId },
+            relations: ['user']
+        });
         const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
         sejour.medecin = medecin;
-        sejour.user = await this.userRepository.findOne({ where: { id: userId } }); // Replace 'this.userRepository' with the actual repository for the 'User' entity
         return await this.sejourRepository.save(sejour);
     }
 }

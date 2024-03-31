@@ -1,4 +1,5 @@
 import { Medecin } from 'src/medecin/medecin.entity';
+import { Sejour } from 'src/sejour/sejour.entity';
 import { User } from 'src/user/user.entity';
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -18,4 +19,7 @@ export class Avis {
 
     @ManyToOne(() => User, (user) => user.avis)
     user: User;
+
+    @ManyToOne(() => Sejour, (sejour) => sejour.avis)
+    sejour: Sejour;
 }

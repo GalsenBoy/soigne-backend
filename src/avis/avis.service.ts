@@ -3,23 +3,49 @@ import { Repository } from 'typeorm';
 import { Avis } from './avis.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sejour } from 'src/sejour/sejour.entity';
+import { Medecin } from 'src/medecin/medecin.entity';
+import { SejourService } from 'src/sejour/sejour.service';
 
 @Injectable()
 export class AvisService {
     constructor(@InjectRepository(Avis) private avisRepository: Repository<Avis>,
-        @InjectRepository(Sejour) private sejourRepository: Repository<Sejour>) { }
+        @InjectRepository(Sejour) private sejourRepository: Repository<Sejour>,
+        @InjectRepository(Medecin) private medecinRepository: Repository<Medecin>,
+        private readonly sejourService: SejourService
+    ) { }
 
-    async createAvisWithMedecinId(avis: Avis, medecinId: string): Promise<Avis> {
-        const sejour = await this.sejourRepository.findOne({ where: { medecin: { id: medecinId } } });
+
+    async createAvis(avis: Avis, sejourId: string, medecinId: string) {
+        const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
+        if (!medecin) {
+            throw new Error('Medecin not found');
+        }
+        const sejour = await this.sejourRepository.findOne({ where: { id: sejourId }, relations: ['medecin', 'user'] });
         if (!sejour) {
             throw new Error('Sejour not found');
         }
-        const newAvis = this.avisRepository.create(avis);
-        newAvis.medecin = sejour.medecin;
-        newAvis.user = sejour.user;
+
         console.log('====================================');
-        console.log(sejour.medecin, sejour.user);
+        console.log(sejour.id);
         console.log('====================================');
+
+        if (sejour.medecin.id !== medecin.id) {
+            throw new Error('Medecin not assigned to this sejour');
+        }
+
+        const newAvis = this.avisRepository.create({
+            ...avis,
+            medecin,
+            user: sejour.user,
+            sejour,
+        });
+
+        console.log('====================================');
+        console.log(sejour);
+        console.log('====================================');
+
         return await this.avisRepository.save(newAvis);
     }
+
+
 }
