@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, SetMetadata, UseGuards } from '@nestjs/common';
 import { SejourService } from './sejour.service';
 import { Sejour } from './sejour.entity';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { Roles } from 'src/roles/role.decorator';
+import { Role } from 'src/roles/role.enum';
 
 
 @Controller('sejour')
@@ -35,10 +36,23 @@ export class SejourController {
         return await this.sejourService.getSejoursByMedecinId(req.user.id);
     }
 
+    // @Roles('Admin')
+    // @SetMetadata('roles', [Role.Admin])
     @UseGuards(JwtAuthGuard)
     @Post('assign')
     async asignerMedecin(@Body() data: { sejourId: string, medecinId: string }) {
-        return await this.sejourService.asignerMedecin(data.sejourId, data.medecinId);
+        return await this.sejourService.asignerMedecinandUser(data.sejourId, data.medecinId);
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Get('withoutmedecin')
+    async getSejoursWithoutMedecin() {
+        return await this.sejourService.getSejour();
+    }
+
+    // @UseGuards(JwtAuthGuard)
+    @Get(':id')
+    async getSejourById(@Request() req) {
+        return await this.sejourService.getSejourById(req.params.id);
+    }
 }
