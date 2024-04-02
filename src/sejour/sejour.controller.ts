@@ -50,7 +50,7 @@ export class SejourController {
         return await this.sejourService.getSejour();
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async getSejourById(@Request() req) {
         return await this.sejourService.getSejourById(req.params.id);

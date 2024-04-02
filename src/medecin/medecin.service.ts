@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Medecin } from './medecin.entity';
 import { Repository } from 'typeorm';
 import { Sejour } from 'src/sejour/sejour.entity';
+import { Prescription } from 'src/prescription/prescription.entity';
 
 @Injectable()
 export class MedecinService {
@@ -31,6 +32,5 @@ export class MedecinService {
         });
         return medecinSejourOfDay;
     }
-
 
 }
