@@ -28,7 +28,10 @@
 
 ## Installation
 
+<p>D'abord cloner le repo avec git clone puis npm install pour installer les dépendences necessaire</p>>
+
 ```bash
+$ git clone https://github.com/GalsenBoy/soigne_moi
 $ npm install
 ```
 
