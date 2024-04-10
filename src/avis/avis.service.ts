@@ -21,80 +21,9 @@ export class AvisService {
         @InjectRepository(Prescription) private prescriptionRepository: Repository<Prescription>,
     ) { }
 
-
-    // async createAvisWithPrescription(avis: Avis, sejourId: string, medecinId: string, prescriptionData: any) {
-    //     const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
-    //     if (!medecin) {
-    //         throw new Error('Medecin not found');
-    //     }
-
-    //     const sejour = await this.sejourRepository.findOne({ where: { id: sejourId }, relations: ['medecin', 'user'] });
-    //     if (!sejour) {
-    //         throw new Error('Sejour not found');
-    //     }
-
-    //     if (sejour.medecin.id !== medecin.id) {
-    //         throw new Error('Medecin not assigned to this sejour');
-    //     }
-
-    //     if (!prescriptionData.medecament || !Array.isArray(prescriptionData.medecament)) {
-    //         throw new Error('Invalid medecament data');
-    //     }
-
-    //     const newPrescription = this.prescriptionRepository.create({
-    //         medecament: prescriptionData.medecament.map((medecament) => {
-    //             return this.medecamentRepository.create(medecament);
-    //         }),
-    //     });
-    //     const savedPrescription = await this.prescriptionRepository.save(newPrescription);
-
-    //     const newAvis = this.avisRepository.create({
-    //         ...avis,
-    //         medecin,
-    //         user: sejour.user,
-    //         sejour,
-    //         prescription: savedPrescription,
-    //     });
-
-    //     return await this.avisRepository.save(newAvis);
-    // }
-
-    // async createAvisWithPrescription(avis: Avis, sejourId: string, medecinId: string, prescriptionData: any) {
-    //     const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
-    //     if (!medecin) {
-    //         throw new Error('Medecin not found');
-    //     }
-
-    //     const sejour = await this.sejourRepository.findOne({ where: { id: sejourId }, relations: ['medecin', 'user'] });
-    //     if (!sejour) {
-    //         throw new Error('Sejour not found');
-    //     }
-
-    //     if (sejour.medecin.id !== medecin.id) {
-    //         throw new Error('Medecin not assigned to this sejour');
-    //     }
-
-    //     if (!prescriptionData.medecament || !Array.isArray(prescriptionData.medecament)) {
-    //         throw new Error('Invalid medecament data');
-    //     }
-
-    //     const newPrescription = this.prescriptionRepository.create({
-    //         medecament: prescriptionData.medecament.map((medecament) => {
-    //             return this.medecamentRepository.create(medecament);
-    //         }),
-    //     });
-    //     const savedPrescription = await this.prescriptionRepository.save(newPrescription);
-
-    //     const newAvis = this.avisRepository.create({
-    //         ...avis,
-    //         medecin,
-    //         user: sejour.user,
-    //         sejour,
-    //         prescription: savedPrescription,
-    //     });
-
-    //     return await this.avisRepository.save(newAvis);
-    // }
+    async getAvis() {
+        return await this.avisRepository.find({ relations: ['medecin', 'user', 'sejour', 'prescription', 'prescription.medecament'] });
+    }
 
     async createAvisWithPrescription(avis: Avis, sejourId: string, medecinId: string, prescriptionData: PrescriptionData) {
         const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
@@ -128,6 +57,7 @@ export class AvisService {
                 user: sejour.user,
                 sejour,
                 prescription: savedPrescription,
+
             });
 
             return await this.avisRepository.save(newAvis);

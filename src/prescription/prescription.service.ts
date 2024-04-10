@@ -14,4 +14,8 @@ export class PrescriptionService {
         newPrescription.medecament = this.medecamentRepository.create(prescription.medecament);
         return this.prescriptionRepository.save(newPrescription);
     }
+
+    async getPrescriptionsById(id: string) {
+        return await this.prescriptionRepository.find({ where: { id }, relations: ['medecament'] });
+    }
 }

@@ -34,6 +34,7 @@ import { Prescription } from './prescription/prescription.entity';
   providers: [AppService, {
     provide: APP_GUARD,
     useClass: RolesGuard,
+
   }],
 })
 export class AppModule { }

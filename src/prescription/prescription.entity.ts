@@ -12,6 +12,4 @@ export class Prescription {
 
     @OneToMany(() => Medecament, (medecament) => medecament.prescription, { cascade: true })
     medecament: Medecament[];
-
-
 }
