@@ -28,7 +28,7 @@ export class AuthService {
             throw new ConflictException('User already exists');
         }
         const passwordHash = await bcrypt.hash(password, 10);
-        const newUser = this.usersRepository.create({ ...user, password: passwordHash, roles: Role.User });
+        const newUser = this.usersRepository.create({ ...user, password: passwordHash, roles: [Role.User] });
         await this.usersRepository.save(newUser);
         return newUser;
     }

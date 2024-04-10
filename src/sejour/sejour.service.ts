@@ -25,7 +25,7 @@ export class SejourService {
     }
 
     async getSejours() {
-        const sejourWithoutMedecins = await this.sejourRepository.find();
+        const sejourWithoutMedecins = await this.sejourRepository.find({ relations: ['user', 'medecin'] });
         return sejourWithoutMedecins.filter(sejourWithoutMedecin => !sejourWithoutMedecin.medecin);
     }
 
@@ -33,12 +33,16 @@ export class SejourService {
         return await this.sejourRepository.find({ where: { user: { id } } });
     }
 
-    async getSejoursByMedecinId(id: string) {
-        return await this.sejourRepository.find({ where: { medecin: { id } } });
+    async getSejoursByMedecinIdWithoutAvis(id: string) {
+        return await this.sejourRepository.find({ where: { medecin: { id } }, relations: ['avis'] });
     }
 
     async getSejourById(id: string) {
-        return await this.sejourRepository.findOne({ where: { id } });
+        const sejour = this.sejourRepository.findOne({ where: { id } });
+        if (!sejour) {
+            throw new Error('Sejour not found');
+        }
+        return sejour;
     }
 
 

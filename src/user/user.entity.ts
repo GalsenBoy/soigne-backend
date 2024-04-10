@@ -23,8 +23,12 @@ export class User {
     @Column()
     zipCode: string;
 
-    @Column()
-    roles: Role;
+    @Column({
+        type: 'enum',
+        enum: Role,
+        // default: [Role.User]
+    })
+    roles: Role[];
 
     @OneToMany(() => Sejour, (sejour) => sejour.user)
     sejours: Sejour[]

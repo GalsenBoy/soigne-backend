@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, Length } from "class-validator";
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString, Length } from "class-validator";
 import { Role } from "src/roles/role.enum";
 
 export class UserDto {
@@ -23,8 +23,4 @@ export class UserDto {
     @IsString()
     @IsNotEmpty()
     zipCode: string;
-
-    @IsString()
-    @IsNotEmpty()
-    roles: Role
 }

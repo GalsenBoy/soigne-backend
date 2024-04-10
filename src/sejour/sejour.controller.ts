@@ -1,9 +1,8 @@
-import { Body, Controller, Get, Post, Request, SetMetadata, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Request, SetMetadata, UseGuards } from '@nestjs/common';
 import { SejourService } from './sejour.service';
 import { Sejour } from './sejour.entity';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
-import { Roles } from 'src/roles/role.decorator';
-import { Role } from 'src/roles/role.enum';
+
 
 
 @Controller('sejour')
@@ -33,7 +32,7 @@ export class SejourController {
     @UseGuards(JwtAuthGuard)
     @Get('medecin')
     async getSejoursByMedecinId(@Request() req) {
-        return await this.sejourService.getSejoursByMedecinId(req.user.id);
+        return await this.sejourService.getSejoursByMedecinIdWithoutAvis(req.user.id);
     }
 
     // @Roles('Admin')
@@ -51,8 +50,8 @@ export class SejourController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get(':id')
-    async getSejourById(@Request() req) {
-        return await this.sejourService.getSejourById(req.params.id);
+    @Get(':sejourId')
+    async getSejourById(@Param('sejourId') sejourId: string) {
+        return await this.sejourService.getSejourById(sejourId);
     }
 }
