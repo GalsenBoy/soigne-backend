@@ -48,6 +48,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Démarrer le serveur
+<p>Le serveur écoute sur le port 8000</p>
+
+```bash
+# Démarrer le serveur
+$ nest start --watch
+```
+
 ## Test
 
 ```bash
