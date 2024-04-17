@@ -1,20 +1,16 @@
 import { Body, Controller, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { AvisService } from './avis.service';
 import { Avis } from './avis.entity';
-import { Prescription } from 'src/prescription/prescription.entity';
-import { Roles } from 'src/roles/role.decorator';
-import { Role } from 'src/roles/role.enum';
-import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
-import { RolesGuard } from 'src/roles/role.guard';
+import { Prescription } from '../prescription/prescription.entity';
+import { JwtAuthGuard } from '../auth/jwt.auth.guard';
+
+
 
 @Controller('avis')
 export class AvisController {
     constructor(private readonly avisService: AvisService) { }
 
-
-
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Roles(Role.Secretaire)
+    @UseGuards(JwtAuthGuard)
     @Get()
     async getAvis() {
         return this.avisService.getAvis();

@@ -1,6 +1,6 @@
-import { Avis } from 'src/avis/avis.entity';
-import { Role } from 'src/roles/role.enum';
-import { Sejour } from 'src/sejour/sejour.entity';
+import { Avis } from '../avis/avis.entity';
+import { Role } from '../roles/role.enum';
+import { Sejour } from '../sejour/sejour.entity';
 import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
@@ -26,9 +26,9 @@ export class User {
     @Column({
         type: 'enum',
         enum: Role,
-        // default: [Role.User]
+        default: [Role.User]
     })
-    roles: Role[];
+    role: Role;
 
     @OneToMany(() => Sejour, (sejour) => sejour.user)
     sejours: Sejour[]
