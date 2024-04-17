@@ -9,13 +9,13 @@ export class PrescriptionService {
     constructor(@InjectRepository(Prescription) private prescriptionRepository: Repository<Prescription>
         , @InjectRepository(Medecament) private medecamentRepository: Repository<Medecament>) { }
 
-    async createPrescription(prescription: Prescription) {
-        const newPrescription = this.prescriptionRepository.create(prescription);
-        newPrescription.medecament = this.medecamentRepository.create(prescription.medecament);
-        return this.prescriptionRepository.save(newPrescription);
-    }
+    // async createPrescription(prescription: Prescription) {
+    //     const newPrescription = this.prescriptionRepository.create(prescription);
+    //     newPrescription.medecament = this.medecamentRepository.create(prescription.medecament);
+    //     return this.prescriptionRepository.save(newPrescription);
+    // }
 
-    async getPrescriptionsById(id: string) {
-        return await this.prescriptionRepository.find({ where: { id }, relations: ['medecament'] });
-    }
+    // async getPrescriptionsById(id: string) {
+    //     return await this.prescriptionRepository.find({ where: { id }, relations: ['medecament'] });
+    // }
 }

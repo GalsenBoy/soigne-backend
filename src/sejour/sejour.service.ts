@@ -2,9 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Sejour } from './sejour.entity';
-import { SejourDto } from 'src/dtos/sejour.dto';
-import { Medecin } from 'src/medecin/medecin.entity';
-import { User } from 'src/user/user.entity';
+import { Medecin } from '../medecin/medecin.entity';
+import { User } from '../user/user.entity';
 
 @Injectable()
 export class SejourService {
@@ -51,7 +50,7 @@ export class SejourService {
             where: { id: sejourId },
             relations: ['user']
         });
-        const medecin = await this.medecinRepository.findOne({ where: { id: medecinId } });
+        const medecin = await this.medecinRepository.findOne({ where: { id: medecinId, specialite: sejour.specialite } });
         sejour.medecin = medecin;
         return await this.sejourRepository.save(sejour);
     }

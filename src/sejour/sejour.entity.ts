@@ -1,6 +1,6 @@
-import { Avis } from "src/avis/avis.entity";
-import { Medecin } from "src/medecin/medecin.entity";
-import { User } from "src/user/user.entity";
+import { Avis } from "../avis/avis.entity";
+import { Medecin } from "../medecin/medecin.entity";
+import { User } from "../user/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -24,9 +24,9 @@ export class Sejour {
     user: User
 
     @ManyToOne(() => Medecin, (medecin) => medecin.sejours)
-    medecin: Medecin;
+    medecin?: Medecin;
 
     @OneToMany(() => Avis, (avis) => avis.sejour)
-    avis: Avis[];
+    avis?: Avis[];
 
 }
