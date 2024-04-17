@@ -1,6 +1,5 @@
-import { Avis } from "src/avis/avis.entity";
-import { Medecament } from "src/medecaments/medecament.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Medecament } from "../medecaments/medecament.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Prescription {

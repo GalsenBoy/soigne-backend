@@ -1,4 +1,4 @@
-import { Prescription } from "src/prescription/prescription.entity";
+import { Prescription } from "../prescription/prescription.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

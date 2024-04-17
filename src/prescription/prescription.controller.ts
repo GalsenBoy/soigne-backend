@@ -7,8 +7,8 @@ export class PrescriptionController {
     constructor(private readonly prescriptionService: PrescriptionService) { }
 
     // @UseGuards(JwtAuthGuard)
-    @Get(':id')
-    async getPrescriptionsById(id: string) {
-        return this.prescriptionService.getPrescriptionsById(id);
-    }
+    // @Get(':id')
+    // async getPrescriptionsById(id: string) {
+    //     return this.prescriptionService.getPrescriptionsById(id);
+    // }
 }

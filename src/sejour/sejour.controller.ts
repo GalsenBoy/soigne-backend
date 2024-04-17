@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, Request, SetMetadata, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { SejourService } from './sejour.service';
 import { Sejour } from './sejour.entity';
-import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { JwtAuthGuard } from '../auth/jwt.auth.guard';
 
 
 

@@ -2,11 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Avis } from './avis.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Sejour } from 'src/sejour/sejour.entity';
-import { Medecin } from 'src/medecin/medecin.entity';
-import { SejourService } from 'src/sejour/sejour.service';
-import { Prescription } from 'src/prescription/prescription.entity';
-import { Medecament } from 'src/medecaments/medecament.entity';
+import { Sejour } from '../sejour/sejour.entity';
+import { Medecin } from '../medecin/medecin.entity';
+import { Prescription } from '../prescription/prescription.entity';
+import { Medecament } from '../medecaments/medecament.entity';
 
 export type PrescriptionData = Pick<Prescription, 'date'> & {
     medecament: Medecament[];

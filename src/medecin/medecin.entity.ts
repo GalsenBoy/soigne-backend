@@ -1,6 +1,6 @@
-import { Avis } from "src/avis/avis.entity";
-import { Sejour } from "src/sejour/sejour.entity";
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Avis } from "../avis/avis.entity";
+import { Sejour } from "../sejour/sejour.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Medecin {
@@ -20,9 +20,9 @@ export class Medecin {
     matricule: string;
 
     @OneToMany(() => Sejour, (sejour) => sejour.medecin)
-    sejours: Sejour[];
+    sejours?: Sejour[];
 
     @OneToMany(() => Avis, (avis) => avis.medecin)
-    avis: Avis[];
+    avis?: Avis[];
 
 }

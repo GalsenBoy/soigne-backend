@@ -18,6 +18,7 @@ import { PrescriptionModule } from './prescription/prescription.module';
 import { MedecamentsModule } from './medecaments/medecaments.module';
 import { Medecament } from './medecaments/medecament.entity';
 import { Prescription } from './prescription/prescription.entity';
+// import { AccessContorlService } from 'src/roles/access.control';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -34,7 +35,6 @@ import { Prescription } from './prescription/prescription.entity';
   providers: [AppService, {
     provide: APP_GUARD,
     useClass: RolesGuard,
-
   }],
 })
 export class AppModule { }
