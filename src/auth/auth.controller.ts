@@ -3,8 +3,7 @@ import { AuthService } from './auth.service';
 import { UserDto } from 'src/dtos/user.dto';
 import { LoginDto } from 'src/dtos/login.dto';
 import { JwtAuthGuard } from './jwt.auth.guard';
-import { Medecin } from 'src/medecin/medecin.entity';
-import { MedecinLoginDto } from 'src/dtos/medecin.login.dto';
+
 
 
 @Controller('auth')
