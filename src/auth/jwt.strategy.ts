@@ -26,19 +26,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: JwtPayload) {
-        // Validation de l'utilisateur ou du médecin
         const user = await this.usersRepository.findOne({ where: { id: payload.id } });
         if (user) {
-            // Si c'est un utilisateur
             const { password, ...result } = user;
             return result;
         } else {
-            // Sinon, vérifiez s'il s'agit d'un médecin
             const medecin = await this.medecinRepository.findOne({ where: { id: payload.id } });
             if (medecin) {
                 return medecin;
             }
-            // Ni utilisateur ni médecin trouvé
             throw new UnauthorizedException();
         }
     }
