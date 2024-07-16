@@ -1,87 +1,83 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Soigne-moi Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)](https://nestjs.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Backend robuste pour l'application de gestion hospitalière "Soigne-moi", conçu pour gérer les données des patients, des médecins, des séjours et des prescriptions.
 
+## Caractéristiques principales
 
-## Vous pouvez aussi trouver le fichier sql à la racine du projet
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+*   **API RESTful:** Fournit des endpoints sécurisés pour la création, la lecture, la mise à jour et la suppression des données.
+*   **Authentification JWT:** Sécurise l'accès aux ressources en vérifiant l'identité des utilisateurs.
+*   **Architecture modulaire (NestJS):**  Organisation claire et maintenable du code.
+*   **TypeORM:** Facilite la gestion des données et l'interaction avec la base de données MySQL.
 
 ## Installation
 
-<p>D'abord cloner le repo avec git clone puis npm install pour installer les dépendences necessaire</p>
+1.  **Cloner le dépôt:**
 
 ```bash
-$ git clone https://github.com/GalsenBoy/soigne_moi
-$ npm install
+git clone https://github.com/GalsenBoy/soigne-backend.git
 ```
 
-## Running the app
+2.  **Installer les dépendances:**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cd soigne-backend
+npm install
 ```
 
-## Démarrer le serveur
-<p>Le serveur écoute sur le port 8000</p>
+3.  **Configurer l'environnement:**
+
+*   Créez un fichier `.env` à la racine du projet.
+*   Renseignez les variables d'environnement nécessaires (voir `.env.example`).
+
+4.  **Lancer la base de données:**
+
+*   Assurez-vous d'avoir MySQL installé et configuré.
+*   Utilisez phpMyAdmin ou un outil similaire pour créer une base de données nommée `e-sante`.
+*   Vous trouverez le fichier SQL à la racine du projet. Ce fichier contient les instructions pour créer les tables et les relations nécessaires dans votre base de données. Pour l'exécuter, utilisez un outil de ligne de commande MySQL ou importez-le dans phpMyAdmin.
+
+5.  **Lancer le serveur de développement:**
 
 ```bash
-# Démarrer le serveur
-$ nest start --watch
+npm run start:dev
 ```
 
-## Test
+## Utilisation
 
-```bash
-# unit tests
-$ npm run test
+L'API sera accessible à l'adresse `http://localhost:3000`. Consultez la documentation de l'API pour connaître les endpoints disponibles et leur utilisation.
 
-# e2e tests
-$ npm run test:e2e
+## Structure du projet
 
-# test coverage
-$ npm run test:cov
+```text
+soigne-backend/
+├── src/
+│   ├── auth/          (Gestion de l'authentification)
+│   ├── users/         (Gestion des utilisateurs)
+│   ├── sejours/       (Gestion des séjours)
+│   ├── prescriptions/ (Gestion des prescriptions)
+│   ├── avis/          (Gestion des avis)
+│   ├── ...            (Autres modules)
+├── .env.example       (Exemple de fichier de configuration)
+└── README.md
 ```
 
-## Support
+## Contribution
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Les contributions sont les bienvenues! Veuillez suivre ces étapes:
 
-## Stay in touch
+1.  Forker le dépôt.
+2.  Créer une branche pour votre fonctionnalité: `git checkout -b ma-nouvelle-fonctionnalite`
+3.  Commiter vos changements: `git commit -m 'Ajouter ma nouvelle fonctionnalité'`
+4.  Pousser la branche: `git push origin ma-nouvelle-fonctionnalite`
+5.  Ouvrir une pull request.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Licence
 
-## License
+Ce projet est sous licence [MIT](LICENSE).
 
-Nest is [MIT licensed](LICENSE).
+## Contact
+
+Pour toute question, vous pouvez ouvrir une issue sur GitHub.
