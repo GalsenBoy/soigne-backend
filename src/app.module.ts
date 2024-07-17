@@ -1,23 +1,17 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { User } from './user/user.entity';
-import { ConfigModule } from '@nestjs/config';
-import { MedecinModule } from './medecin/medecin.module';
-import { SejourModule } from './sejour/sejour.module';
-import { Sejour } from './sejour/sejour.entity';
-import { Medecin } from './medecin/medecin.entity';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './roles/role.guard';
 import { AvisModule } from './avis/avis.module';
-import { Avis } from './avis/avis.entity';
-import { PrescriptionModule } from './prescription/prescription.module';
 import { MedecamentsModule } from './medecaments/medecaments.module';
-import { Medecament } from './medecaments/medecament.entity';
-import { Prescription } from './prescription/prescription.entity';
+import { MedecinModule } from './medecin/medecin.module';
+import { PrescriptionModule } from './prescription/prescription.module';
+import { RolesGuard } from './roles/role.guard';
+import { SejourModule } from './sejour/sejour.module';
+import { UserModule } from './user/user.module';
 // import { AccessContorlService } from 'src/roles/access.control';
 
 @Module({
