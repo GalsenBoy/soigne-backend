@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([Medecin])],
   controllers: [MedecinController],
-  providers: [MedecinService]
+  providers: [MedecinService],
 })
-export class MedecinModule { }
+export class MedecinModule {
+  constructor(private readonly medecinService: MedecinService) {}
+}
